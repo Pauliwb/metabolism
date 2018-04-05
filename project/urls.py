@@ -16,7 +16,19 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from django.conf.urls import url, include
+from django.contrib import admin
+from my_app import views
+from rest_framework import routers
+
+#router = routers.DefaultRouter(views.ProductViewSet)
+#router.register(r'Product',)
+
+router = routers.DefaultRouter()
+router.register(r'Product', views.ProductViewSet)
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('my_app.urls')),
+    url(r'^show', include('my_app.urls')),
+    url(r'^', include(router.urls))
 ]
